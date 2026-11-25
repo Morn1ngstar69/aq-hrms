@@ -1,192 +1,444 @@
-# AQUA HRMS: Next.js application and standalone HTML interface preview
+# AQUA HRMS
+### Human Resource Management System
 
-## START HERE: See the interface without installing anything
+AQUA HRMS is a web-based Human Resource Management System designed to manage employee information, attendance, leave applications, HR operations, company notices, and financial records through a centralized interface.
 
-This ZIP includes a **standalone HTML + CSS + JavaScript interface preview**. It reproduces the AQUA visual styling and includes clickable Admin / HR, Employee, and Accountant workspaces with the same initial sample data as the Next.js project.
+The project was originally based on a Retool application export and has been rebuilt as an independent Next.js application. It includes separate workspaces for Administrators, HR personnel, Employees, and Accountants.
 
-**Fastest method in Visual Studio Code:**
+The repository also includes a standalone HTML preview for exploring the interface without installing the Next.js dependencies.
 
-1. Extract the ZIP and open the `AQUA-HRMS-Nextjs` folder in VS Code.
-2. Open `OPEN-HRMS-PREVIEW.html` in your browser, or open `preview/index.html` directly.
-3. For Live Server users, right-click `preview/index.html`, then select **Open with Live Server**.
-4. Sign in using a demo account below or click one of the demo account tiles.
-5. Explore the dark sidebar navigation, form dialogs, data cards and all three workspaces. The role switcher in the top-right allows fast visual comparison.
+---
 
-**Alternative without VS Code extensions:** open a terminal in the project folder and run:
+## 1. Interface Preview
+
+You can explore the application directly in your browser without installing anything.
+
+### Option 1: Open the HTML preview
+
+1. Extract the project ZIP file.
+2. Open the `AQUA-HRMS-Nextjs` folder.
+3. Open `OPEN-HRMS-PREVIEW.html` in your browser.
+
+Alternatively, open `preview/index.html` directly.
+
+If you use Visual Studio Code with Live Server:
+
+1. Open the project folder in VS Code.
+2. Navigate to `preview/index.html`.
+3. Right-click and select **Open with Live Server**.
+
+### Option 2: Run the local preview server
+
+If Node.js is installed, open a terminal in the project directory and execute:
 
 ```bash
 npm run preview:html
 ```
 
-Open `http://127.0.0.1:4173`. This command uses the built-in Node.js server only. It does not require `npm install` or internet access.
+Then visit:
 
-**Preview directory:**
+`http://127.0.0.1:4173`
+
+This preview server uses Node.js built-in modules and does not require `npm install`.
+
+### Preview files
 
 ```text
-OPEN-HRMS-PREVIEW.html     One-click entry page
-preview/index.html        Actual HTML interface
-preview/styles.css        Full standalone CSS, includes AQUA theme
-preview/preview.js        Frontend interactions in plain JavaScript
-preview/demo-data.js      Bundled demo records copied from lib/seed.js
-preview/serve.mjs         Optional zero-dependency local preview server
+OPEN-HRMS-PREVIEW.html
+preview/
+  index.html
+  styles.css
+  preview.js
+  demo-data.js
+  serve.mjs
 ```
 
-The HTML preview has no Next.js or npm dependency. It supports representative search, navigation, adding/editing/deleting employees, leave approvals, QR token entry, notices, attendance, policy records, salary statements, accounts and reporting. Some advanced workflows are simplified in the preview. The QR graphic is illustrative and **not scannable**. For the real QR component, camera workflow, and full application behavior, run the Next.js project below. All preview data is fictional and changes are only local to your browser session.
+The preview includes the main navigation, dashboard layouts, data tables, dialogs, and representative interactions across all three workspaces.
+
+It supports employee management, leave approvals, attendance records, notices, policy records, salary statements, company accounts, and basic reporting.
+
+The preview uses fictional sample data. Changes are stored locally in the browser and are not connected to the Next.js application's state.
+
+Some advanced operations are simplified. The QR graphic in the preview is illustrative and cannot be scanned.
 
 ---
 
+## 2. Technology Stack
 
-A standalone rebuild of the uploaded `Aqua_employee-info(3).zip` Retool application export. It uses Next.js 16, React 19, semantic HTML and ordinary CSS. The sample dataset is bundled in the repository. There is no database, Retool dependency, server API, cloud account, API key or remote image dependency.
+| Component | Technology |
+|---|---|
+| Framework | Next.js 16 |
+| Frontend | React 19 |
+| Language | JavaScript / JSX |
+| Styling | CSS |
+| Testing | Node.js Test Runner, Vitest |
+| UI Testing | React Testing Library |
+| Data Management | Centralized local state |
+| QR Functionality | Local QR library and browser camera APIs |
 
-## Requirements
+The application runs independently of Retool. Its sample records are bundled with the project, and it does not require an external database, API credentials, or cloud services.
 
-- Node.js 20.9 or newer, preferably Node.js 22 LTS.
+---
+
+## 3. Requirements
+
+Make sure the following are installed:
+
+- Node.js 20.9 or newer (Node.js 22 LTS recommended).
 - npm 10 or newer.
-- Internet access is needed once for `npm install` on a fresh machine. After dependencies are installed, the HRMS application itself does not use external APIs or need internet access.
 
-## Install and run
+An internet connection is required during the initial dependency installation. Once the dependencies are installed, the application can run locally without external API access.
+
+---
+
+## 4. Installation and Setup
+
+Clone or extract the repository and navigate to the project directory.
+
+Install the dependencies:
 
 ```bash
 npm install
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
 
-Open `http://127.0.0.1:3000`.
+Open the application:
 
-To create and serve a production build:
+`http://127.0.0.1:3000`
+
+### Production build
+
+To create a production build:
 
 ```bash
 npm run build
+```
+
+Start the production server:
+
+```bash
 npm run start
 ```
 
-## Run tests
+---
 
-```bash
-npm test
-```
+## 5. Demo Accounts
 
-This runs the native Node.js test suite covering data consistency, CRUD, permissions on self-registration, attendance check-in and check-out, leave validation and approval, balance changes, correction and overtime, reports, and financial calculations.
+The application includes four local demo accounts for testing the different user roles.
 
-UI tests using Vitest and React Testing Library are also included:
-
-```bash
-npm run test:ui
-```
-
-## Sign-in credentials
-
-| Role | Username | Password | Route |
-| --- | --- | --- | --- |
+| Role | Username | Password | Dashboard |
+|---|---|---|---|
 | Administrator | `admin` | `demo123` | `/admin` |
 | HR | `hr` | `demo123` | `/admin` |
 | Employee | `employee` | `demo123` | `/employee` |
 | Accountant | `accountant` | `demo123` | `/accountant` |
 
-All accounts are local demo identities. Credentials are intentionally hard-coded and are not appropriate for a real production deployment. Never store real employee, financial or health data in the demonstration.
+All accounts use the same demo password.
 
-## Features matched to the source
+These credentials are hard-coded for demonstration purposes. They should not be used in a production environment.
 
-### Admin and HR
+---
 
-- Employees: directory, search, department and employment type filtering, profile view, creation, editing, deletion.
-- Designations: department and designation assignment.
-- Attendance: filter, employee summary, add manual record, status, late minutes, check-in and check-out.
-- QR Attendance and HRMS QR Code: create weekly token, display current token, validate check-in and check-out.
-- Leave Requests: review, approve, reject, notes.
-- Notice Board: create, edit, archive, filter, categorize.
-- HR Dashboard: KPIs, department breakdown, all leave requests, manual leave balance adjustments, payroll periods and locking.
-- Approvals: leave, attendance corrections and overtime requests.
-- Policy Admin: leave types, holidays, work schedules and local setup information.
-- Reports and Audit: attendance, leave, overtime, unpaid leave, missing punches, late arrivals, audit records and CSV export.
-- User Management: role assignment and activation, administrator only.
+## 6. Application Modules
 
-### Employee
+### Administrator and HR Workspace
 
-- My Profile: personal details, editable contact information and attendance calendar.
-- Scan Attendance: reads QR codes with supported browser cameras or allows manual token entry, then marks attendance in shared local data.
-- History: attendance calendar and list.
-- Leave Request: submit request, view pending or historical requests.
-- HRMS Leaves: leave balances, new leave requests and history.
-- HRMS Attendance: today, marking attendance, monthly calendar, correction and overtime requests.
-- Notice Board: view and filter announcements.
+**Employee Management**
+- View and search employee records.
+- Filter employees by department and employment type.
+- View individual employee profiles.
+- Add, edit, and remove employee records.
+- Manage department and designation assignments.
 
-### Accountant
+**Attendance Management**
+- View employee attendance records.
+- Filter attendance by employee and date.
+- Add manual attendance entries.
+- Track check-in, check-out, attendance status, and late minutes.
+- Review attendance summaries.
 
-- Salary Statements: month filter, create and edit statements, delete, gross/net calculation and export.
-- Company Accounts: income and expense ledger, transaction creation, editing, deletion and export.
-- Notice Board.
-- Leave and Attendance Reports.
+**QR Attendance**
+- Generate weekly attendance tokens.
+- Display the active attendance token.
+- Validate employee check-in and check-out.
+- Support browser-based QR scanning and manual token entry.
 
-### Authentication
+**Leave Management**
+- Review submitted leave applications.
+- Approve or reject requests.
+- Add comments to leave decisions.
+- Monitor leave balances.
+- Make manual leave balance adjustments.
 
-- Sign-in with role-based routing.
-- Employee self-registration with username, password, email and image input.
-- Local session-only authentication, role visibility, sign-out.
+**Notice Board**
+- Publish company announcements.
+- Edit and archive notices.
+- Organize announcements by category.
+- Filter notices.
 
-## Design and source limitations
+**HR Dashboard**
+- View employee and attendance statistics.
+- Monitor department-wise employee distribution.
+- Review leave requests.
+- Manage payroll periods and payroll locking.
 
-The uploaded export contains a frontend and Retool server functions, but omits its referenced `frontend/lib/shadcn` UI files, generated backend hooks and Retool database. A direct re-run would fail due to those missing resources. This rebuild implements the visible workflows with independent local state instead.
+**Approvals**
+- Review leave applications.
+- Handle attendance correction requests.
+- Review overtime requests.
 
-The original scanner relied on camera/QR modules. This build generates a machine-readable QR code with a locally bundled QR library. It supports native browser BarcodeDetector camera scanning where available and has an always-visible manual token entry fallback. No external QR service is needed. Browser camera access requires permission and typically localhost or HTTPS.
+**Policy Administration**
+- Manage leave types.
+- Configure holidays.
+- Maintain work schedules.
+- Access local system setup information.
 
-The source HRMS migration action initializes real backend tables. Here the System Setup view reports that local demo state is already ready. No migration is performed.
+**Reports and Audit**
+- Attendance reports.
+- Leave and unpaid leave reports.
+- Overtime reports.
+- Missing punch records.
+- Late arrival reports.
+- Audit history and CSV exports.
 
-The source contained additional personal, bank and identity-document fields which are not all reproduced in the simplified personal profile form. No storage or upload for sensitive documents is implemented. Financial calculations, employee counts, attendance, leave balances and HR approvals are connected to the same shared local state.
+**User Management**
+- Assign user roles.
+- Activate or deactivate accounts.
+- Manage application access.
 
-Demo state is stored in `sessionStorage`, so it persists across reloads of the same browser tab for the duration of the tab session. Reopening after the session ends restores the seed records. Admins can restore the initial data using the reset control.
+User management is restricted to administrators.
 
-The seed dates are anchored around 26 October 2026 to illustrate historical and pending records consistently.
+### Employee Workspace
 
-## Project structure
+Employees have access to their personal information and attendance-related activities.
+
+Available features include:
+
+- View and update personal contact information.
+- View attendance history and monthly calendars.
+- Mark attendance using QR scanning or manual token entry.
+- Submit leave applications.
+- View leave balances and application history.
+- Submit attendance correction requests.
+- Submit overtime requests.
+- View company announcements.
+
+### Accountant Workspace
+
+The Accountant workspace handles basic payroll-related records and company financial transactions.
+
+**Salary Statements**
+- Filter salary statements by month.
+- Create and edit salary records.
+- Calculate gross and net salary.
+- Delete records.
+- Export salary information.
+
+**Company Accounts**
+- Maintain income and expense records.
+- Add, edit, and delete transactions.
+- Review financial entries.
+- Export account records.
+
+Accountants can also access the notice board and relevant attendance and leave reports.
+
+---
+
+## 7. Authentication and Access Control
+
+The application includes a local authentication system with role-based routing.
+
+Supported roles:
+
+- Administrator
+- HR
+- Employee
+- Accountant
+
+Employees can also register through the self-registration page using a username, password, email address, and image input.
+
+User sessions are maintained locally in the browser. Access to individual workspaces is determined by the assigned role.
+
+---
+
+## 8. Attendance and QR Scanning
+
+The attendance module supports both QR-based and manual token entry.
+
+The application generates machine-readable QR codes using a locally bundled library. On supported browsers, employees can use their device camera to scan attendance tokens through the `BarcodeDetector` API.
+
+If camera scanning is unavailable, employees can enter the attendance token manually.
+
+Camera access generally requires localhost or an HTTPS connection, along with browser permission.
+
+---
+
+## 9. Data Management
+
+Application data is maintained through a centralized state management system.
+
+The main state and business logic are located in:
 
 ```text
-app/
-  layout.jsx
-  page.jsx
-  error.jsx
-  not-found.jsx
-  globals.css
-  login/page.jsx
-  register/page.jsx
-  admin/page.jsx
-  employee/page.jsx
-  accountant/page.jsx
-components/
-  AquaLogo.jsx
-  ScannerCamera.jsx
-  Auth.jsx
-  EmployeePanels.jsx
-  FinancePanels.jsx
-  HRPanels.jsx
-  UI.jsx
-  WorkPanels.jsx
-  Workspace.jsx
 lib/
   logic.js
   seed.js
   store.jsx
-tests/
-  logic.test.mjs
-  login.test.jsx
-  setup.js
-next.config.mjs
-vitest.config.mjs
-package.json
-README.md
-OPEN-HRMS-PREVIEW.html
-preview/
-  index.html
-  styles.css
-  demo-data.js
-  preview.js
-  serve.mjs
 ```
 
-## State and error handling
+- `logic.js` contains the application operations, validation rules, and state update logic.
+- `seed.js` contains the initial sample records.
+- `store.jsx` manages shared application state across the different workspaces.
 
-The centralized state reducer in `lib/logic.js` validates each mutation and records it in the audit log. All panels read the same state through `lib/store.jsx`. Invalid submissions, overlapping leave, duplicate usernames and conflicting attendance entries produce on-screen errors. Lists have empty states. Edit and delete operations change the current session immediately.
+The application records state changes in an audit log and validates operations before applying them.
 
-## Notes for future real deployments
+Validation covers areas such as:
 
-This is a fully local demonstration, not a secure multi-user HR system. Before using real employee data, build server-side authenticated authorization, use encrypted password storage, protect files and payroll information, add a durable database, validate on the server and implement tested audit retention.
+- Duplicate usernames.
+- Conflicting attendance entries.
+- Overlapping leave applications.
+- Invalid leave requests.
+- Attendance corrections and overtime requests.
+- Leave balance adjustments.
+
+Demo data is stored in `sessionStorage`. It remains available after reloading the same browser tab during the current session. When the session ends, the application returns to the initial sample records.
+
+Administrators can restore the original sample data using the reset option.
+
+The initial dataset uses dates around 26 October 2026.
+
+---
+
+## 10. Testing
+
+The project includes automated tests for application logic and interface behavior.
+
+Run the main test suite:
+
+```bash
+npm test
+```
+
+The Node.js test suite covers:
+
+- Data consistency.
+- Employee record operations.
+- User permissions and registration.
+- Attendance check-in and check-out.
+- Leave validation and approval.
+- Leave balance calculations.
+- Attendance corrections.
+- Overtime requests.
+- Reports.
+- Financial calculations.
+
+Run the UI tests separately:
+
+```bash
+npm run test:ui
+```
+
+These tests use Vitest and React Testing Library.
+
+---
+
+## 11. Project Structure
+
+```text
+AQUA-HRMS-Nextjs/
+│
+├── app/
+│   ├── layout.jsx
+│   ├── page.jsx
+│   ├── error.jsx
+│   ├── not-found.jsx
+│   ├── globals.css
+│   ├── login/
+│   ├── register/
+│   ├── admin/
+│   ├── employee/
+│   └── accountant/
+│
+├── components/
+│   ├── AquaLogo.jsx
+│   ├── ScannerCamera.jsx
+│   ├── Auth.jsx
+│   ├── EmployeePanels.jsx
+│   ├── FinancePanels.jsx
+│   ├── HRPanels.jsx
+│   ├── UI.jsx
+│   ├── WorkPanels.jsx
+│   └── Workspace.jsx
+│
+├── lib/
+│   ├── logic.js
+│   ├── seed.js
+│   └── store.jsx
+│
+├── tests/
+│   ├── logic.test.mjs
+│   ├── login.test.jsx
+│   └── setup.js
+│
+├── preview/
+│   ├── index.html
+│   ├── styles.css
+│   ├── preview.js
+│   ├── demo-data.js
+│   └── serve.mjs
+│
+├── next.config.mjs
+├── vitest.config.mjs
+├── package.json
+├── README.md
+└── OPEN-HRMS-PREVIEW.html
+```
+
+---
+
+## 12. Implementation Notes and Limitations
+
+The original Retool export included frontend components and server functions that depended on additional Retool resources, including UI component files, generated backend hooks, and database connections. Those dependencies were not included in the export.
+
+The current implementation replaces those dependencies with independent React components, local state management, and bundled sample data.
+
+A few differences from the original implementation are worth noting:
+
+- The application does not currently use a persistent database.
+- User authentication is local and is not suitable for real-world account security.
+- Employee, attendance, leave, and financial records are stored in browser session storage.
+- Some personal, banking, and identity-document fields from the original application are not included.
+- Sensitive document uploads and storage have not been implemented.
+- The original backend migration process is not included. The local application starts with its bundled sample data.
+- Some advanced workflows have been simplified.
+
+The application is intended for local demonstration, interface evaluation, and further development.
+
+---
+
+## 13. Before Production Deployment
+
+The current implementation is a local demonstration and should not be used to manage actual employee or financial information.
+
+Before deploying it for organizational use, the following changes are required:
+
+1. Implement server-side authentication and authorization.
+2. Replace hard-coded credentials with secure password hashing and account management.
+3. Introduce a persistent database.
+4. Move sensitive operations and validation to the server.
+5. Implement secure employee document storage.
+6. Protect payroll, personal, and financial information.
+7. Introduce appropriate audit logging and retention policies.
+8. Add proper session management and access controls.
+9. Test the application in a multi-user environment.
+
+---
+
+## License
+
+This project is maintained as an internal AQUA HRMS application. Usage and distribution should follow the organization's requirements.
